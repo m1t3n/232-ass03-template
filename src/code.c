@@ -110,7 +110,6 @@ void link_three(Node *aPtr, Node *bPtr, Node *cPtr)
     bPtr->nextPtr = cPtr;
     cPtr->nextPtr = NULL;
 
-   
 }
 
 
@@ -127,7 +126,8 @@ void link_three(Node *aPtr, Node *bPtr, Node *cPtr)
 
 void remove_middle(Node *aPtr, Node *bPtr, Node *cPtr)
 {
-    // TODO
+    aPtr->nextPtr = cPtr;
+    bPtr->nextPtr = NULL;
 }
 
 
@@ -144,7 +144,7 @@ void remove_middle(Node *aPtr, Node *bPtr, Node *cPtr)
 
 void remove_last(Node *bPtr)
 {
-    // TODO
+    bPtr->nextPtr = NULL;
 }
 
 
@@ -160,7 +160,7 @@ void remove_last(Node *bPtr)
 
 void remove_first(Node *aPtr)
 {
-    // TODO
+    aPtr->nextPtr = NULL;
 }
 
 
@@ -185,7 +185,10 @@ void remove_first(Node *aPtr)
 
 void swap_ptrs(int **aPtrPtr, int **bPtrPtr)
 {
-    // TODO
+    //b into temp->a into b->temp into a
+    int *tempPtr = *bPtrPtr;
+    *bPtrPtr = *aPtrPtr;
+    *aPtrPtr = tempPtr;
 }
 
 
@@ -210,7 +213,7 @@ void swap_ptrs(int **aPtrPtr, int **bPtrPtr)
 
 void nullify(int **ppPtr)
 {
-    // TODO
+    *ppPtr = NULL;
 }
 
 
@@ -237,7 +240,11 @@ void nullify(int **ppPtr)
 
 void assign_bytes(long long *nPtr)
 {
-    // TODO
+    unsigned char *p = (unsigned char *)nPtr;
+
+    for (int i=0; i<8; i++){
+        *(p+i) = i + 1;
+    }
 }
 
 
@@ -259,6 +266,15 @@ void assign_bytes(long long *nPtr)
 
 int sum_chain(Node *headPtr)
 {
-    // TODO
-    return 0;
+    int sum = 0;
+    Node *currentPtr = headPtr;
+    while (currentPtr != NULL) {
+        sum += currentPtr->value;
+        currentPtr = currentPtr->nextPtr;
+    };
+
+    return sum;
 }
+
+
+//i referenced Stack Overflow for the swap() function.
